@@ -1,0 +1,1 @@
+A student as register using a mobile number and email ,verify their identify with OTP, and sent a password. The portal then provides then provides access communication tools.
