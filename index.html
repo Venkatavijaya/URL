@@ -1,143 +1,88 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <title>GPA & Percentage Calculator (7 Subjects)</title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>DevOps Lifecycle</title>
   <style>
     body {
       font-family: Arial, sans-serif;
-      background-color: #eef2f3;
-      display: flex;
-      justify-content: center;
-      padding: 40px;
-    }
-
-    .container {
-      background-color: white;
-      padding: 30px;
-      border-radius: 10px;
-      box-shadow: 0 0 10px rgba(0,0,0,0.2);
-      width: 100%;
-      max-width: 420px;
-    }
-
-    h2 {
+      background: #f9f9f9;
+      margin: 0;
+      padding: 20px;
       text-align: center;
-      color: #333;
-      margin-bottom: 20px;
     }
-
-    label {
-      display: block;
-      margin-top: 15px;
+    h1 {
+      color: #2c3e50;
+    }
+    svg {
+      width: 100%;
+      max-width: 800px;
+      height: auto;
+      margin-top: 40px;
+    }
+    .stage {
+      fill: #3498db;
+      stroke: #2980b9;
+      stroke-width: 2px;
+      cursor: default;
+    }
+    .label {
+      fill: #fff;
+      font-size: 14px;
       font-weight: bold;
-    }
-
-    input[type="number"] {
-      width: 100%;
-      padding: 10px;
-      font-size: 16px;
-      margin-top: 5px;
-      border: 1px solid #ccc;
-      border-radius: 5px;
-    }
-
-    button {
-      width: 100%;
-      padding: 12px;
-      background-color: #007bff;
-      color: white;
-      font-size: 16px;
-      border: none;
-      margin-top: 20px;
-      border-radius: 5px;
-      cursor: pointer;
-    }
-
-    .result {
-      margin-top: 25px;
-      background-color: #f1f1f1;
-      padding: 15px;
-      border-radius: 8px;
-    }
-
-    .result p {
-      font-size: 16px;
-      margin: 8px 0;
-    }
-
-    .note {
-      font-size: 13px;
-      color: #777;
-      text-align: center;
-      margin-top: 10px;
+      pointer-events: none;
     }
   </style>
 </head>
 <body>
-  <div class="container">
-    <h2>🎓 GPA / Percentage Calculator</h2>
+  <h1>DevOps Lifecycle</h1>
+  <p>This diagram illustrates the 8 stages of the DevOps lifecycle.</p>
 
-    <label>Subject 1 Marks</label>
-    <input type="number" id="sub1" min="0" max="75" value="">
+  <!-- SVG Diagram -->
+  <svg viewBox="0 0 800 400">
+    <circle cx="400" cy="200" r="180" fill="#ecf0f1" stroke="#bdc3c7" stroke-width="3" />
 
-    <label>Subject 2 Marks</label>
-    <input type="number" id="sub2" min="0" max="75" value="">
+    <!-- Stages -->
+    <g>
+      <circle class="stage" cx="400" cy="20" r="50" />
+      <text x="400" y="25" text-anchor="middle" class="label">Plan</text>
+    </g>
 
-    <label>Subject 3 Marks</label>
-    <input type="number" id="sub3" min="0" max="75" value="">
+    <g>
+      <circle class="stage" cx="580" cy="80" r="50" />
+      <text x="580" y="85" text-anchor="middle" class="label">Develop</text>
+    </g>
 
-    <label>Subject 4 Marks</label>
-    <input type="number" id="sub4" min="0" max="75" value="">
+    <g>
+      <circle class="stage" cx="700" cy="200" r="50" />
+      <text x="700" y="205" text-anchor="middle" class="label">Build</text>
+    </g>
 
-    <label>Subject 5 Marks</label>
-    <input type="number" id="sub5" min="0" max="75" value="">
+    <g>
+      <circle class="stage" cx="580" cy="320" r="50" />
+      <text x="580" y="325" text-anchor="middle" class="label">Test</text>
+    </g>
 
-    <label>Subject 6 Marks</label>
-    <input type="number" id="sub6" min="0" max="75" value="">
+    <g>
+      <circle class="stage" cx="400" cy="380" r="50" />
+      <text x="400" y="385" text-anchor="middle" class="label">Release</text>
+    </g>
 
-    <label>Subject 7 Marks</label>
-    <input type="number" id="sub7" min="0" max="75" value="">
+    <g>
+      <circle class="stage" cx="220" cy="320" r="50" />
+      <text x="220" y="325" text-anchor="middle" class="label">Deploy</text>
+    </g>
 
-    <button onclick="calculateGPA()">Calculate</button>
+    <g>
+      <circle class="stage" cx="100" cy="200" r="50" />
+      <text x="100" y="205" text-anchor="middle" class="label">Operate</text>
+    </g>
 
-    <div class="result" id="resultBox" style="display:none;">
-      <p><strong>Total Marks:</strong> <span id="totalMarks"></span></p>
-      <p><strong>Percentage:</strong> <span id="percentage"></span>%</p>
-      <p><strong>Estimated GPA:</strong> <span id="gpa"></span></p>
-    </div>
-
-    <p class="note">* GPA is estimated based on percentage (scale: 10).</p>
-  </div>
-
-  <script>
-    function calculateGPA() {
-      const marks = [
-        parseFloat(document.getElementById("sub1").value),
-        parseFloat(document.getElementById("sub2").value),
-        parseFloat(document.getElementById("sub3").value),
-        parseFloat(document.getElementById("sub4").value),
-        parseFloat(document.getElementById("sub5").value),
-        parseFloat(document.getElementById("sub6").value),
-        parseFloat(document.getElementById("sub7").value)
-      ];
-
-      if (marks.some(isNaN)) {
-        alert("Please enter all 7 subject marks.");
-        return;
-      }
-
-      const total = marks.reduce((acc, val) => acc + val, 0);
-      const maxTotal = 7 * 75;
-      const percentage = (total / maxTotal * 100).toFixed(2);
-      let gpa = (percentage / 10).toFixed(2);
-      if (gpa > 10) gpa = "10.00";
-
-      document.getElementById("totalMarks").innerText = total + " / " + maxTotal;
-      document.getElementById("percentage").innerText = percentage;
-      document.getElementById("gpa").innerText = gpa;
-      document.getElementById("resultBox").style.display = "block";
-    }
-  </script>
+    <g>
+      <circle class="stage" cx="220" cy="80" r="50" />
+      <text x="220" y="85" text-anchor="middle" class="label">Monitor</text>
+    </g>
+  </svg>
 </body>
 </html>
